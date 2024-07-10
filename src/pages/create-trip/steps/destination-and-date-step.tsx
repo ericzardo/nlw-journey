@@ -1,4 +1,4 @@
-import { MapPin, Calendar, Settings2, ArrowRight } from "lucide-react"
+import { MapPin, Calendar, Settings2, ArrowRight } from "lucide-react";
 
 interface DestionationAndDateStepProps {
   isGuestsInputOpen: boolean
@@ -6,7 +6,7 @@ interface DestionationAndDateStepProps {
   closeGuestsInput: () => void
 }
 
-export function DestionationAndDateStep({isGuestsInputOpen, openGuestsInput, closeGuestsInput}: DestionationAndDateStepProps) {
+export function DestionationAndDateStep ({isGuestsInputOpen, openGuestsInput, closeGuestsInput}: DestionationAndDateStepProps) {
   return (
     <div className="flex items-center h-16 px-4 gap-3 bg-zinc-900 rounded-xl shadow-shape">
       <span className="flex items-center gap-2 flex-1">
@@ -32,5 +32,5 @@ export function DestionationAndDateStep({isGuestsInputOpen, openGuestsInput, clo
         </button>
       )}
     </div>
-  )
+  );
 }

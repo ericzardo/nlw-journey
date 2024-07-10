@@ -1,12 +1,12 @@
-import { User, Mail, X } from "lucide-react"
-import { FormEvent } from "react"
+import { User, Mail, X } from "lucide-react";
+import { FormEvent } from "react";
 
 interface ConfirmTripModalProps {
   closeConfirmTripModalOpen: () => void
   createTrip: (event: FormEvent<HTMLFormElement>) => void
 }
 
-export function ConfirmTripModal({closeConfirmTripModalOpen, createTrip}: ConfirmTripModalProps) {
+export function ConfirmTripModal ({closeConfirmTripModalOpen, createTrip}: ConfirmTripModalProps) {
   return (
     <div className="fixed inset-0 bg-black/65 flex items-center justify-center">
       <div className="bg-zinc-900 w-[640px] rounded-xl py-5 px-6 space-y-5 shadow-shape">
@@ -42,5 +42,5 @@ export function ConfirmTripModal({closeConfirmTripModalOpen, createTrip}: Confir
 
       </div>
     </div>
-  )
+  );
 }

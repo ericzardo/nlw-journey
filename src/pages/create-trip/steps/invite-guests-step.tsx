@@ -1,4 +1,4 @@
-import { ArrowRight, UserRoundPlus } from "lucide-react"
+import { ArrowRight, UserRoundPlus } from "lucide-react";
 
 interface InviteGuestsStepProps {
   openGuestsModal: () => void
@@ -25,5 +25,5 @@ export function InviteGuestsStep ({openGuestsModal, openConfirmTripModalOpen, em
         <ArrowRight className="size-5"/>
       </button>
     </div>
-  )
+  );
 }

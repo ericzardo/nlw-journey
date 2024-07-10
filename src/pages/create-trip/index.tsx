@@ -4,10 +4,10 @@ import { ConfirmTripModal } from "./confirm-trip-modal";
 import { DestionationAndDateStep } from "./steps/destination-and-date-step";
 import { InviteGuestsStep } from "./steps/invite-guests-step";
 
-export function CreateTripPage() {
+export function CreateTripPage () {
   const [isGuestsInputOpen, setisGuestsInputOpen] = useState(false);
   const [isGuestsModalOpen, setisGuestsModalOpen] = useState(false);
-  const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false)
+  const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false);
 
   const [emailsToInvite, setEmailsToInvite] = useState<string[]>([]); 
 
@@ -21,7 +21,7 @@ export function CreateTripPage() {
   const closeConfirmTripModalOpen = () => setIsConfirmTripModalOpen(false);
 
   const addNewEmailToInvite = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault();
 
     const data = new FormData(event.currentTarget);
     const email = data.get("email")?.toString();
@@ -34,19 +34,19 @@ export function CreateTripPage() {
     ]);
 
     event.currentTarget.reset();
-  }
+  };
 
   const removeEmailToInvite = (emailToRemove: string) => {
     const newEmailList = emailsToInvite.filter(email => email !== emailToRemove);
 
     setEmailsToInvite(newEmailList);
-  }
+  };
 
   const createTrip = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("Create Trip!")
-  }
+    console.log("Create Trip!");
+  };
 
 
   return (
@@ -86,5 +86,5 @@ export function CreateTripPage() {
 
       
     </div>
-  )
+  );
 }
