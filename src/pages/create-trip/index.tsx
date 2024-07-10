@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-import { ArrowRight, UserRoundPlus } from "lucide-react";
 import { InviteGuestsModal } from "./invite-guests-modal";
 import { ConfirmTripModal } from "./confirm-trip-modal";
 import { DestionationAndDateStep } from "./steps/destination-and-date-step";
