@@ -1,5 +1,6 @@
 import { CircleDashed, CircleCheck, UserCog, RefreshCcw, Trash } from "lucide-react";
 import { useState } from "react";
+import { Button } from "../../components/button";
 
 export function Guests () {
   const [isManagingUsers, setIsManagingUsers] = useState(false);
@@ -65,15 +66,15 @@ export function Guests () {
       </span>
 
       {isManagingUsers ? (
-        <button onClick={closeHandleUsers} className="bg-lime-300 text-lime-950 rounded-lg px-5 h-11 flex items-center justify-center gap-2 hover:bg-lime-400">
+        <Button onClick={closeHandleUsers} >
           <RefreshCcw className="size-5"/>
-        Atualizar convidados
-        </button>
+          Atualizar convidados
+        </Button>
       ) : (
-        <button onClick={openHandleUsers} className="bg-zinc-800 text-zinc-200 w-full rounded-lg px-5 h-11 flex items-center justify-center gap-2 hover:bg-zinc-700">
+        <Button variant="secondary" onClick={openHandleUsers} >
           <UserCog className="size-5 text-zinc-200"/>
-        Gerenciar convidados
-        </button>
+          Gerenciar convidados
+        </Button>
       )}
 
     

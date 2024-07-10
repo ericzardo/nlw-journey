@@ -35,7 +35,7 @@ export function ImportantLinks ({openCreateLinkModal}: ImportantLinksProps) {
 
       <button onClick={openCreateLinkModal} type="button" className="bg-zinc-800 text-zinc-200 w-full rounded-lg px-5 h-11 flex items-center justify-center gap-2 hover:bg-zinc-700">
         <Plus className="size-5 text-zinc-200"/>
-      Cadastrar novo link
+        Cadastrar novo link
       </button>
     </div>
   );

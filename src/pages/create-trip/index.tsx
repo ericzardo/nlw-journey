@@ -22,6 +22,7 @@ export function CreateTripPage () {
 
   const addNewEmailToInvite = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log("TESTE");
 
     const data = new FormData(event.currentTarget);
     const email = data.get("email")?.toString();

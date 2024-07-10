@@ -1,4 +1,6 @@
 import { X, Tag, Calendar } from "lucide-react";
+import { Button } from "../../../components/button";
+import { Input } from "../../../components/input";
 
 interface CreateActivityModalProps {
   closeCreateActivityModal: () => void
@@ -21,21 +23,12 @@ export function CreateActivityModal ({closeCreateActivityModal}: CreateActivityM
         </div>
 
         <form className="space-y-3">
-          <span className="flex items-center h-14 px-4 py-2.5 gap-3 bg-zinc-950 rounded-xl">
-            <Tag className="size-5 text-zinc-400" />
-            <input name="title" placeholder="Qual a atividade?" className="bg-transparent text-md placeholder-zinc-400 outline-none w-full" />
-          </span>
+          <Input icon={<Tag className="size-5 text-zinc-400" />} placeholder="Qual a atividade?" name="activity_title" />
 
-          <span className="flex items-center h-14 px-4 py-2.5 gap-3 bg-zinc-950 rounded-xl">
-            <Calendar className="size-5 text-zinc-400" />
-            <input type="datetime-local" name="occurs_at" placeholder="Seu e-mail pessoal" className="bg-transparent text-md placeholder-zinc-400 outline-none w-full" />
-          </span>
+          <Input type="datetime-local" icon={<Calendar className="size-5 text-zinc-400" />} name="occurs_at" />
 
+          <Button type="submit" size="full">Salvar atividade</Button>
 
-
-          <button type="submit" className="w-full justify-center bg-lime-300 text-lime-950 rounded-lg px-5 py-2 flex items-center gap-2 hover:bg-lime-400">
-            Salvar atividade
-          </button>
         </form>
 
       </div>

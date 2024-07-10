@@ -1,4 +1,6 @@
 import { Link2, Tag, X } from "lucide-react";
+import { Button } from "../../../components/button";
+import { Input } from "../../../components/input";
 
 interface CreateLinkModalProps {
   closeCreateLinkModal: () => void
@@ -21,21 +23,12 @@ export function CreateLinkModal ({ closeCreateLinkModal }: CreateLinkModalProps)
         </div>
 
         <form className="space-y-3">
-          <span className="flex items-center h-14 px-4 py-2.5 gap-3 bg-zinc-950 rounded-xl">
-            <Tag className="size-5 text-zinc-400" />
-            <input name="link_title" placeholder="Título do link" className="bg-transparent text-md placeholder-zinc-400 outline-none w-full" />
-          </span>
 
-          <span className="flex items-center h-14 px-4 py-2.5 gap-3 bg-zinc-950 rounded-xl">
-            <Link2 className="size-5 text-zinc-400" />
-            <input type="url" name="url" placeholder="URL" className="bg-transparent text-md placeholder-zinc-400 outline-none w-full" />
-          </span>
+          <Input name="link_title" placeholder="Título do link" icon={ <Tag className="size-5 text-zinc-400" /> } />
+          <Input type="url" name="url" placeholder="URL" icon={ <Link2 className="size-5 text-zinc-400" /> } />
 
-
-
-          <button type="submit" className="w-full justify-center bg-lime-300 text-lime-950 rounded-lg px-5 py-2 flex items-center gap-2 hover:bg-lime-400">
-            Salvar link
-          </button>
+          <Button type="submit" size="full">Salvar link</Button>
+          
         </form>
 
       </div>
