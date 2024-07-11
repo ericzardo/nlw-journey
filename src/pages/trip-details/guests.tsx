@@ -1,82 +1,53 @@
-import { CircleDashed, CircleCheck, UserCog, RefreshCcw, Trash } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { api } from "../../lib/axios";
+
+import { CircleDashed, CircleCheck, UserCog } from "lucide-react";
+import { useParams } from "react-router-dom";
 import { Button } from "../../components/button";
 
-export function Guests () {
-  const [isManagingUsers, setIsManagingUsers] = useState(false);
+interface Participant {
+  id: string
+  name: string | null
+  email: string
+  is_confirmed: boolean
+}
 
-  const openHandleUsers = () => setIsManagingUsers(true);
-  const closeHandleUsers = () => setIsManagingUsers(false);
+export function Guests () {
+  const { tripId } = useParams();
+
+  const [participants, setParticipants] = useState<Participant[]>([]);
+
+  useEffect(() => {
+    api.get(`trips/${tripId}/participants`).then(response => setParticipants(response.data.participants));
+  }, [ tripId ]);
 
   return (
     <div className="flex flex-col gap-6">
       <h2 className="text-xl text-zinc-50 font-semibold">Convidados</h2>
 
       <span className="space-y-4">
+        {participants.map((participant, index) => (
+          <div key={participant.id} className="flex items-center justify-between gap-3">
+            <span>
+              <p className="text-zinc-100 font-medium">{participant.name ?? `Convidado ${index}`}</p>
+              <p className="text-zinc-400 text-xs truncate">{participant.email}</p>
+            </span>
 
-        <div className="flex items-center justify-between gap-3">
-          <span>
-            <p className="text-zinc-100 font-medium">Jessica White</p>
-            <p className="text-zinc-400 text-xs truncate">jessica.white44@yahoo.com</p>
-          </span>
+            {participant.is_confirmed ? (
+              <CircleCheck className="size-5 text-green-400 shrink-0" />
+            ) : (
+              <CircleDashed className="size-5 text-zinc-400 shrink-0" />
+            )}
 
-          {isManagingUsers ? (
-            <button>
-              <Trash className="size-5 text-red-400 shrink-0" />
-            </button>
-          
-          ) : (
-            <CircleDashed className="size-5 text-zinc-400 shrink-0" />
-          )}
-
-        </div>
-
-        <div className="flex items-center justify-between gap-3">
-          <span>
-            <p className="text-zinc-100 font-medium">Dr. Rita Pacocha</p>
-            <p className="text-zinc-400 text-xs truncate">lacy.stiedemann@gmail.com</p>
-          </span>
-
-          {isManagingUsers ? (
-            <button>
-              <Trash className="size-5 text-red-400 shrink-0" />
-            </button>
-          ) : (
-            <CircleCheck className="size-5 text-lime-300 shrink-0" />
-          )}
-
-        </div>
-
-        <div className="flex items-center justify-between gap-3">
-          <span>
-            <p className="text-zinc-100 font-medium">Wilfred Dickens III</p>
-            <p className="text-zinc-400 text-xs truncate">marian.hyatt@hotmail.com</p>
-          </span>
-
-          {isManagingUsers ? (
-            <button>
-              <Trash className="size-5 text-red-400 shrink-0" />
-            </button>
-          ) : (
-            <CircleCheck className="size-5 text-lime-300 shrink-0" />
-          )}
-
-        </div>
-
+          </div>
+        ))}
       </span>
 
-      {isManagingUsers ? (
-        <Button onClick={closeHandleUsers} >
-          <RefreshCcw className="size-5"/>
-          Atualizar convidados
-        </Button>
-      ) : (
-        <Button variant="secondary" onClick={openHandleUsers} >
-          <UserCog className="size-5 text-zinc-200"/>
-          Gerenciar convidados
-        </Button>
-      )}
-
+      <Button variant="secondary">
+        <UserCog className="size-5 text-zinc-200"/>
+        Gerenciar convidados
+      </Button>
     
     </div>
   );
