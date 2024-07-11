@@ -2,31 +2,29 @@ import { User, Mail, X } from "lucide-react";
 import { FormEvent } from "react";
 import { Button } from "../../components/button";
 import { Input } from "../../components/input";
-import { api } from "../../lib/axios";
-import { useParams } from "react-router-dom";
+import { DateRange } from "react-day-picker";
+import { format } from "date-fns";
 
 interface ConfirmTripModalProps {
   closeConfirmTripModalOpen: () => void
   setOwnerEmail: (email: string) => void
   setOwnerName: (name: string) => void
   createTrip: (event: FormEvent<HTMLFormElement>) => void
+
+  destination: string
+  eventStartAndEndDates: DateRange | undefined
 }
 
-export function ConfirmTripModal ({closeConfirmTripModalOpen, createTrip, setOwnerEmail, setOwnerName}: ConfirmTripModalProps) {
-  const { tripId } = useParams();
+export function ConfirmTripModal ({closeConfirmTripModalOpen, createTrip, setOwnerEmail, setOwnerName, destination, eventStartAndEndDates}: ConfirmTripModalProps) {
+  const displayedDate = () => {
 
-  const confirmTripAndSendInvitations = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    const [starts_at, ends_at] = [eventStartAndEndDates?.from, eventStartAndEndDates?.to];
 
-    createTrip(event);
+    if (!starts_at || !ends_at) return "[data invalida]";
 
-    await api.get(`/trips/${tripId}/confirm`)
-      .then(response => {
-        console.log(response.status);
-      })
-      .catch(error => console.log(error.response));
-
+    return format(starts_at, "d' de 'LLL").concat(" a ").concat(format(ends_at, "d' de 'LLL"));
   };
+
 
   return (
     <div className="fixed inset-0 bg-black/65 flex items-center justify-center">
@@ -40,10 +38,10 @@ export function ConfirmTripModal ({closeConfirmTripModalOpen, createTrip, setOwn
             </button>
           </div>
 
-          <p className="text-sm text-zinc-400">Para concluir a criação da viagem para <span className="font-semibold text-zinc-100">Florianópolis, Brasil</span> nas datas de <span className="font-semibold text-zinc-100">16 a 27 de Agosto de 2024</span> preencha seus dados abaixo:</p>
+          <p className="text-sm text-zinc-400">Para concluir a criação da viagem para <span className="font-semibold text-zinc-100">{destination}</span> nas datas de <span className="font-semibold text-zinc-100">{displayedDate()}</span> preencha seus dados abaixo:</p>
         </div>
 
-        <form onSubmit={confirmTripAndSendInvitations} className="space-y-3">
+        <form onSubmit={createTrip} className="space-y-3">
           <Input
             name="name"
             placeholder="Seu nome completo"

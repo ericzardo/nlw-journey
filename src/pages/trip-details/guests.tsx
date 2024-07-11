@@ -22,6 +22,8 @@ export function Guests () {
     api.get(`trips/${tripId}/participants`).then(response => setParticipants(response.data.participants));
   }, [ tripId ]);
 
+  console.log(participants)
+
   return (
     <div className="flex flex-col gap-6">
       <h2 className="text-xl text-zinc-50 font-semibold">Convidados</h2>

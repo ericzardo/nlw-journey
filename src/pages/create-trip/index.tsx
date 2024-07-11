@@ -72,16 +72,19 @@ export function CreateTripPage () {
       owner_email: ownerEmail
     };
 
-    await api.post("/trips", data)
-      .then(response => {
-        const { tripId } = response.data;
-       
-        navigate(`/trips/${tripId}`);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    const response = await api.post("/trips", data);
+    const { tripId } = response.data;
 
+    if (!tripId) return;
+
+    await Promise.all(
+      emailsToInvite.map(email => {
+        api.post(`/trips/${tripId}/invites`, { email })
+        .catch(error => console.log(error))
+      })
+    );
+
+    navigate(`/trips/${tripId}`);
   };
 
 
@@ -132,6 +135,8 @@ export function CreateTripPage () {
           closeConfirmTripModalOpen={closeConfirmTripModalOpen}
           setOwnerEmail={setOwnerEmail}
           setOwnerName={setOwnerName}
+          destination={destination}
+          eventStartAndEndDates={eventStartAndEndDates}
           createTrip={createTrip}
         />
       )}
