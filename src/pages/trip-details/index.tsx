@@ -6,18 +6,14 @@ import { ImportantLinks } from "./important-links";
 import { Guests } from "./guests";
 import { Activities } from "./activities";
 import { CreateActivityModal } from "./modal/create-activity-modal";
-import { CreateLinkModal } from "./modal/create-link-modal";
 
 export function TripDetailsPage () {
   const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] = useState(false);
-  const [isCreateLinkModalOpen, setIsCreateLinkModalOpen] = useState(false);
 
   const openCreateActivityModal = () => setIsCreateActivityModalOpen(true);
   const closeCreateActivityModal = () => setIsCreateActivityModalOpen(false);
 
-
-  const openCreateLinkModal = () => setIsCreateLinkModalOpen(true);
-  const closeCreateLinkModal = () => setIsCreateLinkModalOpen(false);
+  const [ isToUpdateActivities, setIsToUpdateActivities ] = useState(false);
 
   return (
     <div className="max-w-6xl mx-auto py-10 space-y-8">
@@ -35,12 +31,12 @@ export function TripDetailsPage () {
             </button>
           </span>
 
-          <Activities />
+          <Activities isToUpdateActivities={isToUpdateActivities} />
 
         </div>
 
         <div className="w-80 space-y-6">
-          <ImportantLinks openCreateLinkModal={openCreateLinkModal}/>
+          <ImportantLinks />
           <span className="block w-full h-px bg-zinc-800" />
           <Guests />
         </div>
@@ -48,11 +44,10 @@ export function TripDetailsPage () {
       </main>
 
       {isCreateActivityModalOpen && (
-        <CreateActivityModal closeCreateActivityModal={closeCreateActivityModal} />
-      )}
-
-      {isCreateLinkModalOpen && (
-        <CreateLinkModal closeCreateLinkModal={closeCreateLinkModal} />
+        <CreateActivityModal
+          closeCreateActivityModal={closeCreateActivityModal}
+          isToUpdateActivities={isToUpdateActivities}
+          setIsToUpdateActivities={setIsToUpdateActivities} />
       )}
       
 

@@ -15,14 +15,22 @@ interface Activity {
   }[]
 }
 
-export function Activities () {
+interface Activities {
+  isToUpdateActivities: boolean
+}
+
+export function Activities ({ isToUpdateActivities }: Activities) {
   const { tripId } = useParams();
 
   const [activities, setActivities] = useState<Activity[]>([]);
 
-  useEffect(() => {
+  const fetchActivities = () => {
     api.get(`trips/${tripId}/activities`).then(response => setActivities(response.data.activities));
-  }, [ tripId ]);
+  };
+
+  useEffect(() => {
+    fetchActivities();
+  }, [ tripId, isToUpdateActivities ]);
 
   return (
     <div className="space-y-8">
@@ -34,7 +42,7 @@ export function Activities () {
             <p className="text-xs text-zinc-500">{format(category.date, "EEEE", { locale: ptBR })}</p>
           </span>
           {category.activities.length > 0 ? (
-            <div>
+            <div className="flex flex-col gap-2.5">
               {category.activities.map(activity => (
                 <div key={activity.id} className="w-full h-10 flex items-center px-4 bg-zinc-900 rounded-xl shadow-shape">
                   <span className="flex flex-1 gap-3">

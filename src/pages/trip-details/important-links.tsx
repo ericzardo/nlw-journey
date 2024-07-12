@@ -5,6 +5,7 @@ import { api } from "../../lib/axios";
 
 import { Link2, Plus } from "lucide-react";
 import { Button } from "../../components/button";
+import { CreateLinkModal } from "./modal/create-link-modal";
 
 interface Link {
   id: string
@@ -12,17 +13,22 @@ interface Link {
   url: string
 }
 
-interface ImportantLinksProps {
-  openCreateLinkModal: () => void
-}
 
-export function ImportantLinks ({openCreateLinkModal}: ImportantLinksProps) {
+export function ImportantLinks () {
   const { tripId } = useParams();
 
   const [links, setLinks] = useState<Link[]>([]);
+  const [isCreateLinkModalOpen, setIsCreateLinkModalOpen] = useState(false);
+
+  const openCreateLinkModal = () => setIsCreateLinkModalOpen(true);
+  const closeCreateLinkModal = () => setIsCreateLinkModalOpen(false);
+
+  const fetchLinks = async () => {
+    await api.get(`trips/${tripId}/links`).then(response => setLinks(response.data.links));
+  }
 
   useEffect(() => {
-    api.get(`trips/${tripId}/links`).then(response => setLinks(response.data.links));
+    fetchLinks()
   }, [ tripId ]);
 
   return (
@@ -51,6 +57,10 @@ export function ImportantLinks ({openCreateLinkModal}: ImportantLinksProps) {
         <Plus className="size-5 text-zinc-200"/>
         Cadastrar novo link
       </Button>
+
+      {isCreateLinkModalOpen && (
+        <CreateLinkModal closeCreateLinkModal={closeCreateLinkModal} updateLinks={fetchLinks}/>
+      )}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { api } from "../../lib/axios";
 import { CircleDashed, CircleCheck, UserCog } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { Button } from "../../components/button";
+import { ManageGuestsModal } from "./modal/manage-guests-modal";
 
 interface Participant {
   id: string
@@ -17,12 +18,18 @@ export function Guests () {
   const { tripId } = useParams();
 
   const [participants, setParticipants] = useState<Participant[]>([]);
+  const [isManageGuestsModalOpen, setIsManageGuestsModalOpen] = useState(false);
+
+  const closeManageGuestsModal = () => setIsManageGuestsModalOpen(false);
+  const openManageGuestsModal = () => setIsManageGuestsModalOpen(true);
+
+  const fetchParticipants = () => {
+    api.get(`trips/${tripId}/participants`).then(response => setParticipants(response.data.participants));
+  };
 
   useEffect(() => {
-    api.get(`trips/${tripId}/participants`).then(response => setParticipants(response.data.participants));
+    fetchParticipants()
   }, [ tripId ]);
-
-  console.log(participants)
 
   return (
     <div className="flex flex-col gap-6">
@@ -46,11 +53,15 @@ export function Guests () {
         ))}
       </span>
 
-      <Button variant="secondary">
+      <Button variant="secondary" onClick={openManageGuestsModal}>
         <UserCog className="size-5 text-zinc-200"/>
         Gerenciar convidados
       </Button>
-    
+
+      {isManageGuestsModalOpen && (
+        <ManageGuestsModal closeManageGuestsModal={closeManageGuestsModal} participants={participants} updateParticipants={fetchParticipants} />
+      )}
+
     </div>
   );
 }

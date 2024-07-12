@@ -77,14 +77,10 @@ export function CreateTripPage () {
 
     if (!tripId) return;
 
-    await Promise.all(
-      emailsToInvite.map(email => {
-        api.post(`/trips/${tripId}/invites`, { email })
-        .catch(error => console.log(error))
-      })
-    );
-
     navigate(`/trips/${tripId}`);
+
+    await api.get(`/trips/${tripId}/confirm`)
+
   };
 
 
