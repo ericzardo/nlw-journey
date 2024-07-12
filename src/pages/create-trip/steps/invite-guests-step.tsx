@@ -1,7 +1,5 @@
 import { ArrowRight, UserRoundPlus } from "lucide-react";
 import { Button } from "../../../components/button";
-import { api } from "../../../lib/axios";
-import { useParams } from "react-router-dom";
 
 interface InviteGuestsStepProps {
   openGuestsModal: () => void
@@ -10,13 +8,6 @@ interface InviteGuestsStepProps {
 }
 
 export function InviteGuestsStep ({openGuestsModal, openConfirmTripModalOpen, emailsToInvite}: InviteGuestsStepProps) {
-  const { tripId } = useParams();
-  
-  const test = () => {
-    api.get(`/trips/${tripId}/confirm`);
-    openConfirmTripModalOpen();
-  };
-
 
   return (
     <div className="flex items-center h-16 px-4 gap-3 bg-zinc-900 rounded-xl shadow-shape">

@@ -32,7 +32,7 @@ export function ManageGuestsModal ({ closeManageGuestsModal, participants, updat
         ...prev,
         [participant.id]: participant.is_confirmed,
       }));
-    })
+    });
   }, [ tripId ]);
 
   const guestConfirmation = async (participantId: string) => {
@@ -42,7 +42,7 @@ export function ManageGuestsModal ({ closeManageGuestsModal, participants, updat
     }));
 
     await api.get(`/participants/${participantId}/confirm`)
-    .catch(error => console.log(error));
+      .catch(error => console.log(error));
   };
 
   const addNewEmailToInvite = async (event: FormEvent<HTMLFormElement>) => {
@@ -53,17 +53,17 @@ export function ManageGuestsModal ({ closeManageGuestsModal, participants, updat
 
     if (!email) return;
 
-    event.currentTarget.reset()
+    event.currentTarget.reset();
 
     await api.post(`/trips/${tripId}/invites`, { email })
-    .catch(error => console.log(error))
+      .catch(error => console.log(error));
 
-  }
+  };
 
   const updateGuests = () => {
     updateParticipants();
     closeManageGuestsModal();
-  }
+  };
 
   return (
     <Modal >
@@ -104,7 +104,7 @@ export function ManageGuestsModal ({ closeManageGuestsModal, participants, updat
 
             {localConfirmations[participant.id] ? (
               <CircleCheck className="size-fit text-green-400 shrink-0" />
-              ) : (
+            ) : (
               <button onClick={() => guestConfirmation(participant.id)}>
                 <CircleDashed className="size-fit text-zinc-400 shrink-0" />
               </button>
@@ -115,5 +115,5 @@ export function ManageGuestsModal ({ closeManageGuestsModal, participants, updat
       
       </form>
     </Modal>
-  )
+  );
 }

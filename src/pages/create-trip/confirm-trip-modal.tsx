@@ -1,9 +1,11 @@
-import { User, Mail, X } from "lucide-react";
 import { FormEvent } from "react";
+
+import { format } from "date-fns";
+
+import { DateRange } from "react-day-picker";
+import { User, Mail, X } from "lucide-react";
 import { Button } from "../../components/button";
 import { Input } from "../../components/input";
-import { DateRange } from "react-day-picker";
-import { format } from "date-fns";
 import { Modal } from "../../components/modal";
 
 interface ConfirmTripModalProps {

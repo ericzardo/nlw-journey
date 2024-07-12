@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { api } from "../../lib/axios";
 
 import { CircleDashed, CircleCheck, UserCog } from "lucide-react";
-import { useParams } from "react-router-dom";
 import { Button } from "../../components/button";
 import { ManageGuestsModal } from "./modal/manage-guests-modal";
 
@@ -28,7 +28,7 @@ export function Guests () {
   };
 
   useEffect(() => {
-    fetchParticipants()
+    fetchParticipants();
   }, [ tripId ]);
 
   return (

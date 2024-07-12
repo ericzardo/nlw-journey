@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode } from "react";
 
 interface ModalProps {
   children: ReactNode
@@ -11,5 +11,5 @@ export function Modal ({ children }: ModalProps) {
         {children}
       </div>
     </div>
-  )
+  );
 }

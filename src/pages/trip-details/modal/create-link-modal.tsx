@@ -27,7 +27,7 @@ export function CreateLinkModal ({ closeCreateLinkModal, updateLinks }: CreateLi
     await api.post(`/trips/${tripId}/links`, {title, url});
 
     closeCreateLinkModal();
-    updateLinks()
+    updateLinks();
   };
 
   return (

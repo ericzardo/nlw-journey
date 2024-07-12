@@ -25,10 +25,10 @@ export function ImportantLinks () {
 
   const fetchLinks = async () => {
     await api.get(`trips/${tripId}/links`).then(response => setLinks(response.data.links));
-  }
+  };
 
   useEffect(() => {
-    fetchLinks()
+    fetchLinks();
   }, [ tripId ]);
 
   return (

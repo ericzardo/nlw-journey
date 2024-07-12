@@ -79,7 +79,7 @@ export function CreateTripPage () {
 
     navigate(`/trips/${tripId}`);
 
-    await api.get(`/trips/${tripId}/confirm`)
+    await api.get(`/trips/${tripId}/confirm`);
 
   };
 

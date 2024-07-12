@@ -28,7 +28,7 @@ export function CreateActivityModal ({closeCreateActivityModal, setIsToUpdateAct
     await api.post(`/trips/${tripId}/activities`, {title, occurs_at});
 
     closeCreateActivityModal();
-    setIsToUpdateActivities(!isToUpdateActivities)
+    setIsToUpdateActivities(!isToUpdateActivities);
   };
 
   return (

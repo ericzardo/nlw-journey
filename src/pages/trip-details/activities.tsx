@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+
 import { api } from "../../lib/axios";
 
 import { CircleCheck } from "lucide-react";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 
 interface Activity {
   date: string 
@@ -29,7 +31,7 @@ export function Activities ({ isToUpdateActivities }: Activities) {
   };
 
   useEffect(() => {
-    fetchActivities();
+    fetchActivities();  
   }, [ tripId, isToUpdateActivities ]);
 
   return (
