@@ -45,6 +45,6 @@ To get a local copy of the project up and running, follow these simple steps.
 
 &nbsp;
 
-*This project was developed with guidance and resources provided by [Rocketseat's]([https://pages.github.com/](https://app.rocketseat.com.br/?logout=true)). NLW Journey React course.*
+*This project was developed with guidance and resources provided by [Rocketseat's](https://app.rocketseat.com.br/?logout=true). NLW Journey React course.*
 
 
