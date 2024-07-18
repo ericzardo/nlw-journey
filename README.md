@@ -41,8 +41,9 @@ To get a local copy of the project up and running, follow these simple steps.
     ```
 2. Open your browser and go to `http://localhost:5173/` to see the application in action.
 
+&nbsp;
 
-
+&nbsp;
 
 *This project was developed with guidance and resources provided by [Rocketseat's]([https://pages.github.com/](https://app.rocketseat.com.br/?logout=true)). NLW Journey React course.*
 
